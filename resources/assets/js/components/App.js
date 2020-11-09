@@ -8,20 +8,22 @@ class App extends Component {
             name: "",
             tasks: []
         };
-        // bind
+
+        // Bind 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.renderTasks = this.renderTasks.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
     }
-    // handle change
+
+    // Handle change
     handleChange(e) {
         this.setState({
             name: e.target.value
         });
-        // console.log(e.target.value);
     }
-    // handle submit
+
+    // Handle submit
     handleSubmit(e) {
         e.preventDefault();
         axios
@@ -29,14 +31,14 @@ class App extends Component {
                 name: this.state.name
             })
             .then(response => {
-                // console.log('from handle sumit', response);
                 this.setState({
                     tasks: [response.data, ...this.state.tasks],
                     name: ""
                 });
             });
     }
-    // render tasks
+
+    // Render Todo list
     renderTasks() {
         return this.state.tasks.map(task => (
             <div key={task.id} className="media">
@@ -54,14 +56,12 @@ class App extends Component {
                         <div className="action float-right">
                         <Link
                             to={`/${task.id}/edit`}
-                            className="btn btn-sm btn-success float-right"
-                        >
+                            className="btn btn-sm btn-success float-right">
                             Edit
                         </Link>
                         <button
                             onClick={() => this.handleDelete(task.id)}
-                            className="btn btn-sm btn-warning"
-                        >
+                            className="btn btn-sm btn-warning">
                                 Delete
                         </button>
                             </div>

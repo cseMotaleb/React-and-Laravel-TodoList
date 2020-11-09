@@ -8,18 +8,20 @@ class TaskEdit extends Component {
             name: '',
             task: []
         };
-        // bind
+
+        // Bind
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    // handle change
+
+    // Handle Change
     handleChange(e) {
         this.setState({
             name: e.target.value
         });
-        // console.log(e.target.value);
     }
-    // handle submit
+
+    // Handle submit
     handleSubmit(e) {
         e.preventDefault();
         axios
@@ -27,12 +29,11 @@ class TaskEdit extends Component {
                 name: this.state.name
             })
             .then(response => {
-                // console.log('from handle sumit', response);
                 this.props.history.push('/');
             });
     }
 
-    // get all the tasks from backend
+    // Get Data 
     getTasks() {
         axios.get(`/tasks/${this.props.match.params.id}/edit`).then(response =>
             this.setState({
@@ -41,7 +42,8 @@ class TaskEdit extends Component {
             })
         );
     }
-    // lifecycle mehtod
+
+    // Lifecycle mehtod
     componentWillMount() {
         this.getTasks();
     }
@@ -65,8 +67,7 @@ class TaskEdit extends Component {
                                             rows="5"
                                             maxLength="255"
                                             placeholder="Create a new Todo"
-                                            required
-                                        />
+                                            required/>
                                     </div>
                                     <button type="submit" className="btn btn-primary">
                                         Update
